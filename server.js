@@ -1,17 +1,17 @@
 // values for the enviroment variables set in the .env file can be accesed at proces.env.VARIABLE_NAME
 var express = require('express')
 var app1 = express()
-app1.set('port', (process.env.PORT || 5000))
+app1.set('port', (process.env.PORT || 3000))
 
 const app = require('github-app')({
-  id: '50724',
+  id: process.env.APP_ID,
   cert: require('fs').readFileSync('.data/private-key.pem')
 })
 
-
+const secret = process.env.WEBHOOK_SECRET
 const webHookHandler = require('github-webhook-handler')({
   path: '/',
-  secret: '1234567890'
+  secret: secret
 })
 
 
