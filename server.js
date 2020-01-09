@@ -1,5 +1,7 @@
 // values for the enviroment variables set in the .env file can be accesed at proces.env.VARIABLE_NAME
-const http = require('http')
+var express = require('express')
+var app1 = express()
+app1.set('port', (process.env.PORT || 5000))
 
 const app = require('github-app')({
   id: '50724',
@@ -11,7 +13,6 @@ const webHookHandler = require('github-webhook-handler')({
   path: '/',
   secret: '1234567890'
 })
-http.createServer(handleRequest).listen(3000)
 
 
 webHookHandler.on('issues', (event) => {
@@ -35,6 +36,14 @@ webHookHandler.on('push', (event) => {
   console.log(event.payload.repository)
 })
 
+app1.get('/', function(request, response) {
+  response.send('Hello World!')
+})
+
+app1.get('/', function(request, response) {
+  webHookHandler(request, response, () => response.end('ok'))
+})
+
 function handleRequest (request, response) {
   // ignore all requests that aren’t POST requests
   if (request.method !== 'POST') return response.end('ok')
@@ -43,6 +52,10 @@ function handleRequest (request, response) {
   // on top. If the request is valid, then the "issue" above handler is called
   webHookHandler(request, response, () => response.end('ok'))
 }
+
+app1.listen(app1.get('port'), function() {
+  console.log("Node app is running at localhost:" + app1.get('port'))
+})
 
 // webHookHandler.on('issues', (event) => {
 //   console.log("ISSUES EVENT")
