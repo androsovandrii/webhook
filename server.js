@@ -1,7 +1,6 @@
 // values for the enviroment variables set in the .env file can be accesed at proces.env.VARIABLE_NAME
 const http = require('http')
 
-
 const app = require('github-app')({
   id: '50724',
   cert: require('fs').readFileSync('.data/private-key.pem')
