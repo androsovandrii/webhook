@@ -40,7 +40,7 @@ app1.get('/', function(request, response) {
   response.send('Hello World!')
 })
 
-app1.get('/', function(request, response) {
+app1.post('/', function(request, response) {
   webHookHandler(request, response, () => response.end('ok'))
 })
 
