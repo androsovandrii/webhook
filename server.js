@@ -34,7 +34,7 @@ webHookHandler.on('pull_request', (event) => {
   console.log("PULL REQUEST EVENT")
   console.log(event.payload)
   // ignore all issue events other than new issue opened
-  if (event.payload.action !== 'opened') return
+  //if (event.payload.action !== 'opened') return
   const {installation, repository, issue} = event.payload
   app.asInstallation(installation.id).then((github) => {
     github.pullRequests.createComment({
@@ -45,6 +45,10 @@ webHookHandler.on('pull_request', (event) => {
     })
   })
 })
+
+webhooks.on("*", ({ id, name, payload }) => {
+  console.log(name, "event received");
+});
 
 webHookHandler.on('push', (event) => {
   console.log("PUSH EVENT")
