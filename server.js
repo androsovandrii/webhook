@@ -25,7 +25,23 @@ webHookHandler.on('issues', (event) => {
       owner: repository.owner.login,
       repo: repository.name,
       number: issue.number,
-      body: 'Welcome to the robot uprising.'
+      body: 'Welcome: AVAS just started analysis of your repository'
+    })
+  })
+})
+
+webHookHandler.on('pull_request', (event) => {
+  // ignore all issue events other than new issue opened
+  if (event.payload.action !== 'opened') return
+  console.log("PULL REQUEST EVENT")
+  console.log(event.payload)
+  const {installation, repository, issue} = event.payload
+  app.asInstallation(installation.id).then((github) => {
+    github.pullRequests.createComment({
+      owner: repository.owner.login,
+      repo: repository.name,
+      number: issue.number,
+      body: 'Welcome: AVAS just started analysis of your repository for pull request'
     })
   })
 })
