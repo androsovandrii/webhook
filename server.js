@@ -46,8 +46,10 @@ webHookHandler.on('pull_request', (event) => {
   })
 })
 
-webHookHandler.on("*", ({ id, name, payload }) => {
-  console.log(name, "event received");
+webHookHandler.on("*", (event) => {
+  console.log("event received");
+  console.log(event.payload);
+  console.log("event received");
 });
 
 webHookHandler.on('push', (event) => {
