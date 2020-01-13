@@ -66,6 +66,12 @@ app1.post('/', function(request, response) {
   webHookHandler(request, response, () => response.end('ok'))
 })
 
+app1.post('/webhook', function(request, response) {
+  console.log(request.body);
+  console.log(request.body.pull_request.head.sha);
+  response.send('Hello World!');
+})
+
 function handleRequest (request, response) {
   // ignore all requests that aren’t POST requests
   if (request.method !== 'POST') return response.end('ok')
