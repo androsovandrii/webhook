@@ -67,7 +67,8 @@ app1.post('/', function(request, response) {
 })
 
 app1.post('/webhook', function(request, response) {
-  console.log(request.body.payload);
+  console.log(request);
+  response.send('Hello World!')
 })
 
 function handleRequest (request, response) {
