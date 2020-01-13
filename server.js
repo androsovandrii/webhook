@@ -1,6 +1,7 @@
 // values for the enviroment variables set in the .env file can be accesed at proces.env.VARIABLE_NAME
 var express = require('express')
 var app1 = express()
+app1.use(express.json())
 app1.set('port', (process.env.PORT || 3000))
 
 const app = require('github-app')({
@@ -45,12 +46,6 @@ webHookHandler.on('pull_request', (event) => {
     })
   })
 })
-
-webHookHandler.on("*", (event) => {
-  console.log("event received");
-  console.log(event.payload);
-  console.log("event received");
-});
 
 webHookHandler.on('push', (event) => {
   console.log("PUSH EVENT")
