@@ -63,9 +63,9 @@ app1.get('/', function(request, response) {
   response.send('Hello World!')
 })
 
-app1.post('/', function(request, response) {
+/*app1.post('/', function(request, response) {
   webHookHandler(request, response, () => response.end('ok'))
-})
+})*/
 
 app1.post('/webhook', function(request, response) {
   console.log(request.body);
