@@ -1,6 +1,8 @@
 // values for the enviroment variables set in the .env file can be accesed at proces.env.VARIABLE_NAME
 var express = require('express')
 var app1 = express()
+const bodyParser = require('body-parser');
+app1.use(bodyParser);
 app1.set('port', (process.env.PORT || 3000))
 
 const app = require('github-app')({
@@ -67,7 +69,7 @@ app1.post('/', function(request, response) {
 })
 
 app1.post('/webhook', function(request, response) {
-  console.log(request);
+  console.log(request.body);
   response.send('Hello World!')
 })
 
